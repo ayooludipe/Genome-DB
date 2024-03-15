@@ -24,7 +24,7 @@ The Genome Data Management System is a database system designed to store and man
 - `README.md`: Documentation providing an overview of the project, installation instructions, and usage guidelines.
 
 ## Contributors
-- [Your Name](https://github.com/yourusername)
+- [aoludipe](https://github.com/ayooludipe)
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
