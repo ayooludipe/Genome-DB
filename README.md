@@ -55,4 +55,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Contact
 
-For questions, feedback, or support, please contact us at [ayooludipe](mailto:aoludipe@unomaha.edu).
+For questions, feedback, or support, please contact me at [ayooludipe](mailto:aoludipe@unomaha.edu).
