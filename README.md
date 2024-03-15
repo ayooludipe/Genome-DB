@@ -1,58 +1,30 @@
-# Genomic Data Integration Project
+# Genome Data Management System
 
 ## Overview
-
-The Genomic Data Integration Project is a comprehensive platform designed to facilitate the integration, management, and analysis of genomic data. Leveraging data from reputable sources such as the National Center for Biotechnology Information (NCBI) databases, the project aims to provide researchers and bioinformaticians with a powerful toolset for exploring genetic relationships, identifying patterns, and gaining insights into complex biological processes.
+The Genome Data Management System is a database system designed to store and manage gene and protein data along with their corresponding nucleotide and protein sequences.
 
 ## Features
-
-- **Integration of NCBI Data:** Seamlessly integrate genomic data from NCBI's nucleotide and protein databases.
-- **Gene-Protein Linking:** Establish a secondary database linking genes to proteins, enabling comprehensive analysis of genetic information.
-- **User-Friendly Interface:** Intuitive user interface for easy navigation and data exploration.
-- **Educational Integration:** Features supporting integration into bioinformatics courses and educational programs for hands-on learning experiences.
-- **Collaboration:** Foster collaboration among researchers by providing tools for data sharing, collaborative analyses, and discussions.
+- Store gene and protein information including names and descriptions.
+- Store nucleotide and protein sequence data.
+- Establish links between genes and proteins.
 
 ## Installation
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/ayooludipe/genomic-data-integration.git
-   ```
-
-2. Navigate to the project directory:
-   ```bash
-   cd genomic-data-integration
-   ```
-
-3. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-4. Configure environment variables:
-   - Create a `.env` file and add the necessary environment variables (e.g., database connection settings).
-
-5. Start the server:
-   ```bash
-   npm start
-   ```
+1. Clone this repository to your local machine.
+2. Execute the `ddl.sql` script in your preferred SQL database management system to create the necessary tables.
+3. You may populate the tables with sample data for testing purposes using the provided `sample_data.sql` script.
+4. Start using the system to manage your genome data.
 
 ## Usage
+- Use the provided SQL queries to interact with the database and perform operations such as inserting, updating, and querying data.
+- Ensure proper handling of foreign key constraints when linking genes and proteins.
 
-1. Access the web interface at `http://localhost:3000`.
-2. Explore genomic data, analyze gene-protein relationships, and collaborate with other users.
+## File Structure
+- `ddl.sql`: Contains the Data Definition Language (DDL) code to create the database tables.
+- `sample_data.sql`: Optional script to populate the tables with sample data.
+- `README.md`: Documentation providing an overview of the project, installation instructions, and usage guidelines.
 
-## Contributing
-
-We welcome contributions from the community! If you'd like to contribute to the project, please follow these guidelines:
-- Fork the repository and create a new branch for your feature or bug fix.
-- Make your changes and ensure all tests pass.
-- Submit a pull request with a clear description of your changes.
+## Contributors
+- [Your Name](https://github.com/yourusername)
 
 ## License
-
 This project is licensed under the [MIT License](LICENSE).
-
-## Contact
-
-For questions, feedback, or support, please contact me at [ayooludipe](mailto:aoludipe@unomaha.edu).
