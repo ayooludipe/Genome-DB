@@ -1,3 +1,6 @@
+-- Use my database
+USE aoludipe;
+
 DROP TABLE IF EXISTS GeneProteinLink;
 DROP TABLE IF EXISTS NucleotideData;
 DROP TABLE IF EXISTS Protein;
