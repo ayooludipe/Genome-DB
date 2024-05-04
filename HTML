@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gene and Protein Database</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Gene and Protein Database</h1>
+    <form action="insert.php" method="post">
+        <label for="gene_name">Gene Name:</label><br>
+        <input type="text" id="gene_name" name="gene_name"><br>
+        <label for="nucleotide_sequence">Nucleotide Sequence:</label><br>
+        <textarea id="nucleotide_sequence" name="nucleotide_sequence"></textarea><br>
+        <label for="protein_name">Protein Name:</label><br>
+        <input type="text" id="protein_name" name="protein_name"><br>
+        <label for="protein_sequence">Protein Sequence:</label><br>
+        <textarea id="protein_sequence" name="protein_sequence"></textarea><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
