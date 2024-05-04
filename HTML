@@ -7,17 +7,27 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Gene and Protein Database</h1>
-    <form action="insert.php" method="post">
-        <label for="gene_name">Gene Name:</label><br>
-        <input type="text" id="gene_name" name="gene_name"><br>
-        <label for="nucleotide_sequence">Nucleotide Sequence:</label><br>
-        <textarea id="nucleotide_sequence" name="nucleotide_sequence"></textarea><br>
-        <label for="protein_name">Protein Name:</label><br>
-        <input type="text" id="protein_name" name="protein_name"><br>
-        <label for="protein_sequence">Protein Sequence:</label><br>
-        <textarea id="protein_sequence" name="protein_sequence"></textarea><br>
-        <input type="submit" value="Submit">
-    </form>
+    <div class="container">
+        <h1>Gene and Protein Database</h1>
+        <!-- Search Form -->
+        <form action="search.php" method="get">
+            <label for="search_gene">Search Gene:</label><br>
+            <input type="text" id="search_gene" name="search_gene" required><br>
+            <input type="submit" value="Search">
+        </form>
+        
+        <!-- Gene and Protein Input Form -->
+        <form action="index.php" method="post">
+            <label for="gene_name">Gene Name:</label><br>
+            <input type="text" id="gene_name" name="gene_name" required><br>
+            <label for="nucleotide_sequence">Nucleotide Sequence:</label><br>
+            <textarea id="nucleotide_sequence" name="nucleotide_sequence" required></textarea><br>
+            <label for="protein_name">Protein Name:</label><br>
+            <input type="text" id="protein_name" name="protein_name" required><br>
+            <label for="protein_sequence">Protein Sequence:</label><br>
+            <textarea id="protein_sequence" name="protein_sequence" required></textarea><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
 </body>
 </html>
