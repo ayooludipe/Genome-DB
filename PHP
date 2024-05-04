@@ -1,0 +1,52 @@
+<?php
+// Connect to the database
+$servername = "localhost";
+$username = "username";
+$password = "password";
+$dbname = "gene_protein_db";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Inserting data into genes table
+$gene_name = "Example Gene";
+$nucleotide_sequence = "ATCG...";
+
+$sql = "INSERT INTO genes (gene_name, nucleotide_sequence) VALUES ('$gene_name', '$nucleotide_sequence')";
+
+if ($conn->query($sql) === TRUE) {
+    echo "New gene record created successfully";
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+}
+
+// Inserting data into proteins table
+$protein_name = "Example Protein";
+$protein_sequence = "Amino acids...";
+
+$sql = "INSERT INTO proteins (protein_name, protein_sequence) VALUES ('$protein_name', '$protein_sequence')";
+
+if ($conn->query($sql) === TRUE) {
+    echo "New protein record created successfully";
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+}
+
+// Linking gene and protein
+$gene_id = 1; // Assuming gene_id of the previously inserted gene
+$protein_id = 1; // Assuming protein_id of the previously inserted protein
+
+$sql = "INSERT INTO gene_protein_links (gene_id, protein_id) VALUES ('$gene_id', '$protein_id')";
+
+if ($conn->query($sql) === TRUE) {
+    echo "Gene and protein linked successfully";
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+}
+
+// Close the database connection
+$conn->close();
+?>
