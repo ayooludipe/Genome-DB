@@ -1,5 +1,5 @@
 <?php
-// Connect to the database
+// Database connection
 $servername = "localhost";
 $username = "username";
 $password = "password";
@@ -11,42 +11,28 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Inserting data into genes table
-$gene_name = "Example Gene";
-$nucleotide_sequence = "ATCG...";
+// Handle search query
+if ($_SERVER["REQUEST_METHOD"] == "GET") {
+    $search_gene = $_GET['search_gene'];
 
-$sql = "INSERT INTO genes (gene_name, nucleotide_sequence) VALUES ('$gene_name', '$nucleotide_sequence')";
+    $sql = "SELECT * FROM genes WHERE gene_name LIKE '%$search_gene%'";
+    $result = $conn->query($sql);
 
-if ($conn->query($sql) === TRUE) {
-    echo "New gene record created successfully";
-} else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
+    if ($result->num_rows > 0) {
+        echo "<div class='container'>";
+        echo "<h2>Search Results:</h2>";
+        echo "<ul>";
+        while ($row = $result->fetch_assoc()) {
+            echo "<li>" . $row['gene_name'] . "</li>";
+        }
+        echo "</ul>";
+        echo "</div>";
+    } else {
+        echo "<div class='container'>";
+        echo "No results found.";
+        echo "</div>";
+    }
 }
 
-// Inserting data into proteins table
-$protein_name = "Example Protein";
-$protein_sequence = "Amino acids...";
-
-$sql = "INSERT INTO proteins (protein_name, protein_sequence) VALUES ('$protein_name', '$protein_sequence')";
-
-if ($conn->query($sql) === TRUE) {
-    echo "New protein record created successfully";
-} else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-}
-
-// Linking gene and protein
-$gene_id = 1; // Assuming gene_id of the previously inserted gene
-$protein_id = 1; // Assuming protein_id of the previously inserted protein
-
-$sql = "INSERT INTO gene_protein_links (gene_id, protein_id) VALUES ('$gene_id', '$protein_id')";
-
-if ($conn->query($sql) === TRUE) {
-    echo "Gene and protein linked successfully";
-} else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-}
-
-// Close the database connection
 $conn->close();
 ?>
