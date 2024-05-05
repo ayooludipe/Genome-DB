@@ -22,11 +22,6 @@ if($connect->connect_error){
 /* Run a basic SQL query and throw
  * an error if its unable to perform the query
  */
-$query = "SELECT nuid FROM instructor";
-$result = mysqli_query($connect, $query) 
-	  or trigger_error("Query Failed! SQL: $query - Error: "
-	  . mysqli_error($connect), E_USER_ERROR);
-echo "Query is: $query <br>";
 
 /*If there are results from the query, print the 0th
  * token in the current tuple from the result relation
