@@ -1,38 +1,48 @@
 <?php
-// Database connection
-$servername = "localhost";
-$username = "username";
-$password = "password";
-$dbname = "gene_protein_db";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+/*Connection variables at top
+* Makes it easy to change if needed*/
+$server="localhost";
+$username="aoludipe";
+$password="";
+$database="aoludipe";
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+/*Connect to my database
+* and throw errors if its unable to connect.
+* Greets the web user if it is able to connect.*/
+$connect = mysqli_connect($server,$username,"",$database);
+
+if($connect->connect_error){
+	echo "Something has gone terribly wrong";
+	echo "Connection error:" .$connect->connect_error;
+}else{
+	echo "<p>Hello World, How Are You Today?</p>";
 }
 
-// Handle search query
-if ($_SERVER["REQUEST_METHOD"] == "GET") {
-    $search_gene = $_GET['search_gene'];
+/* Run a basic SQL query and throw
+ * an error if its unable to perform the query
+ */
+$query = "SELECT nuid FROM instructor";
+$result = mysqli_query($connect, $query) 
+	  or trigger_error("Query Failed! SQL: $query - Error: "
+	  . mysqli_error($connect), E_USER_ERROR);
+echo "Query is: $query <br>";
 
-    $sql = "SELECT * FROM genes WHERE gene_name LIKE '%$search_gene%'";
-    $result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        echo "<div class='container'>";
-        echo "<h2>Search Results:</h2>";
-        echo "<ul>";
-        while ($row = $result->fetch_assoc()) {
-            echo "<li>" . $row['gene_name'] . "</li>";
-        }
-        echo "</ul>";
-        echo "</div>";
-    } else {
-        echo "<div class='container'>";
-        echo "No results found.";
-        echo "</div>";
+/*If there are results from the query, print the 0th
+ * token in the current tuple from the result relation
+ * If there are no results, print an error message.
+ */
+if ($result = mysqli_query($connect, $query)) {
+    while ($row = mysqli_fetch_row($result)) {
+        printf("<br>%s", $row[0]);
     }
+    mysqli_free_result($result);
+}else{
+	echo "No results";
 }
 
-$conn->close();
+/*Always close your connection. 
+ * Its a courtesy to your fellow users.
+ */
+mysqli_close($connect);
 ?>
