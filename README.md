@@ -1,7 +1,7 @@
 # Human Genome System
 
 ## Overview
-The Genome Data Management System is a database system designed to store and manage gene and protein data along with their corresponding nucleotide and protein sequences.
+The Human Genome System is a database system designed to store and manage gene and protein data along with their corresponding nucleotide and protein sequences.
 
 ## Features
 - Store gene and protein information including names and descriptions.
