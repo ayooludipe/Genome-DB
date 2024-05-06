@@ -1,0 +1,26 @@
+-- Insert data into Chromosomes table
+INSERT INTO Chromosomes (chromosome_name, genome_build) VALUES
+('Chr1', 'GRCh38'),
+('Chr2', 'GRCh38'),
+-- Add more chromosomes as needed
+
+-- Insert data into Genes table
+-- Assume you have the necessary data from KEGG Homo sapiens
+INSERT INTO Genes (gene_name, chromosome_id, start_position, end_position, gene_sequence) VALUES
+('Gene1', 1, 1000, 2000, 'ATCG...'),
+('Gene2', 2, 1500, 2500, 'ATCG...'),
+-- Add more genes as needed
+
+-- Insert data into Proteins table
+-- Assume you have the necessary data from UniProt
+INSERT INTO Proteins (protein_name, gene_id, protein_sequence) VALUES
+('Protein1', 1, 'MKFL...'),
+('Protein2', 2, 'LTGR...'),
+-- Add more proteins as needed
+
+-- Insert data into Variants table
+-- Assume you have the necessary data for gene variants
+INSERT INTO Variants (gene_id, variant_type, variant_position, reference_sequence, alternate_sequence) VALUES
+(1, 'SNP', 1500, 'A', 'G'),
+(2, 'Insertion', 2000, 'T', 'TA'),
+-- Add more variants as needed
