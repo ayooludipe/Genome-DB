@@ -1,1 +1,25 @@
 https://lucid.app/documents/view/b3a41236-3de0-4f3e-bcfa-eccc66c3a955
+A New digram Table:
+ 1.    Genes:
+      •     gene_id (Primary Key)
+      •     gene_name
+      •     chromosome_id (Foreign Key referencing Chromosomes)
+      •     start_position
+      •     end_position
+      •     gene_sequence
+      2.    Chromosomes:
+      •     chromosome_id (Primary Key)
+      •     chromosome_name
+      •     genome_build
+      3.    Proteins:
+      •     protein_id (Primary Key)
+      •     protein_name
+      •     gene_id (Foreign Key referencing Genes)
+      •     protein_sequence
+      4.    Variants:
+      •     variant_id (Primary Key)
+      •     gene_id (Foreign Key referencing Genes)
+      •     variant_type
+      •     variant_position
+      •     reference_sequence
+      •     alternate_sequence
