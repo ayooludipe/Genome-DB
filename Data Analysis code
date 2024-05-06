@@ -1,0 +1,24 @@
+import psycopg2
+
+# Connect to the database
+conn = psycopg2.connect(database="genomic_database", user="username", password="password", host="localhost", port="5432")
+cursor = conn.cursor()
+
+# Query for significant gene-disease associations
+cursor.execute("""
+    SELECT g.gene_name, d.disease_name, ga.p_value
+    FROM Genes g
+    JOIN GeneDiseaseAssociations ga ON g.gene_id = ga.gene_id
+    JOIN Diseases d ON ga.disease_id = d.disease_id
+    WHERE ga.p_value < 0.05
+""")
+gene_disease_associations = cursor.fetchall()
+
+# Print significant associations
+print("Significant Gene-Disease Associations:")
+for row in gene_disease_associations:
+    print(row[0], "-", row[1], "(p-value:", row[2], ")")
+
+# Close database connection
+cursor.close()
+conn.close()
