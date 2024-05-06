@@ -1,0 +1,26 @@
+Table: Chromosomes
+- chromosome_id: (Primary Key) Unique identifier for each chromosome.
+- chromosome_name: Name of the chromosome.
+- genome_build: Version of the genome build (e.g., GRCh38).
+
+ Table: Genes
+- gene_id: (Primary Key) Unique identifier for each gene.
+- gene_name: Name of the gene.
+- chromosome_id: (Foreign Key) Identifier of the chromosome to which the gene belongs.
+- start_position: Start position of the gene on the chromosome.
+- end_position: End position of the gene on the chromosome.
+- gene_sequence: DNA sequence of the gene.
+
+ Table: Proteins
+- protein_id: (Primary Key) Unique identifier for each protein.
+- protein_name: Name of the protein.
+- gene_id: (Foreign Key) Identifier of the gene that encodes the protein.
+- protein_sequence: Amino acid sequence of the protein.
+
+Table: Variants
+- variant_id: (Primary Key) Unique identifier for each variant.
+- gene_id: (Foreign Key) Identifier of the gene associated with the variant.
+- variant_type: Type of variant (e.g., SNP, insertion, deletion).
+- variant_position: Position of the variant within the gene.
+- reference_sequence: Reference DNA sequence at the variant position.
+- alternate_sequence: Alternate DNA sequence at the variant position.
