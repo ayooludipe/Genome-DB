@@ -1,68 +1,78 @@
-<?php
-   $servername = "localhost";
-   $username = "aoludipe";
-   $password = "";
-   $dbname = "aoludipe";
-
-   // connect the database with the server
-   $conn = new mysqli($servername,$username,$password,$dbname);
-
-    // if error occurs
-    if ($conn -> connect_errno)
-    {
-       echo "Failed to connect to MySQL: " . $conn -> connect_error;
-       exit();
-    }
-
-    $sql = "SELECT * FROM Human_Genome";
-    $result = ($conn->query($sql));
-    //declare array to store the data of database
-    $row = [];
-
-    if ($result->num_rows > 0)
-    {
-        // fetch all data from db into array
-        $row = $result->fetch_all(MYSQLI_ASSOC);
-    }
-?>
-
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
-    <link rel="stylesheet" type="text/css" href="webpage_style.css">
+
     <meta charset="UTF-8">
-    <meta name="webview" content="width=device-width, initial-scale=1.0">
+
+    <meta http-equiv="X-UA-Compactible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   
+
+    <title>Human Genome Database</title>
+
+ 
+
+ 
+
+ <link rel="stylesheet" href="css/styles.css">
+
+ 
+
+      
+
 </head>
+
 <body>
-    <h1>BIOI-4870 Final Project [Human Genome Database System]</h1>
-    <p>This is my final project for BIOI 4870. It is made to help researchers to predict what mutation typ$
-    <p>To navigate this tool, click on one of the cancer names from the table below. It should take you to$
-        By clicking on one of the genes within the list, it should visualize the proportion of each mutati$
-        Some genes will not show a pie chart. This is either because it did not have any mutation record o$
-    </p>
-    <h2>Gene Table</h2>
-    <p>Select a Gene type from this table.</p>
-    <table id="GeneTable">
-        <thead>
-            <tr>
-                <th>Gebe Name</th>
-                <th>Gene Symbol</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-               if(!empty($row))
-               foreach($row as $rows)
-              {
-            ?>
-            <tr>
 
-                <td><?php echo $rows['Gene_name']; ?></td>
-                <td><a href="<?php echo $rows['Gene_abb'] ?>.php"><?php echo $rows['Gene_abb']; ?></a>$
+    <header>
 
-            </tr>
-            <?php } ?>
-        </tbody>
-    </table>
-</body>
-</html>
+        <div class="logo">
+
+            <img src="Human_Genome.png" alt="Human Genome">
+
+        </div>
+
+        <h1>Human Genome Database</h1>
+
+        <div class="sm">
+
+            <img src="Google.png" alt="Google">
+
+        </div>
+
+   
+
+    <nav class="menu">
+
+        <a href="#home">Home</a>
+
+        <a href="About.html/mission.txt">About</a>
+
+
+    </nav>
+
+    </header>
+
+  
+
+    <section id="home">
+
+        <h2>Welcome to the Human Genome Database</h2>
+
+        <p>This website provides information about Human Genomes and related data.<brk/>
+
+            Human genome, all of the approximately three billion base pairs of deoxyribonucleic acid (DNA) that make up the entire set of chromosomes of the human organism. The human genome includes the coding regions of DNA, which encode all the genes (between 20,000 and 25,000) of the human organism, as well as the noncoding regions of DNA, which do not encode any genes.</brk></p>
+
+    </section>
+
+ 
+
+    <section id="about">
+
+        <h2>About Us</h2>
+
+        <p>This database is designed to collect and store information related to Human Genome Data.</p>
