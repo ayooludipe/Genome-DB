@@ -1,0 +1,36 @@
+ DDL (Data Definition Language):
+
+Create Tables (SQL):
+
+```sql
+-- Create Chromosomes table
+CREATE TABLE Chromosomes (
+    chromosome_id INT PRIMARY KEY,
+    chromosome_name VARCHAR(50)
+);
+
+-- Create Genes table
+CREATE TABLE Genes (
+    gene_id INT PRIMARY KEY,
+    gene_name VARCHAR(255),
+    chromosome_id INT,
+    FOREIGN KEY (chromosome_id) REFERENCES Chromosomes(chromosome_id)
+);
+``` sql
+Insert Sample Data (SQL):
+
+```sql
+-- Insert sample chromosomes
+INSERT INTO Chromosomes (chromosome_id, chromosome_name) VALUES
+(1, 'Chromosome 1'),
+(2, 'Chromosome 2'),
+(3, 'Chromosome 3');
+
+-- Insert sample genes
+INSERT INTO Genes (gene_id, gene_name, chromosome_id) VALUES
+(1, 'Gene A', 1),
+(2, 'Gene B', 1),
+(3, 'Gene C', 2),
+(4, 'Gene D', 2),
+(5, 'Gene E', 3);
+```
