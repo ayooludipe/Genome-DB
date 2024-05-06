@@ -1,0 +1,44 @@
+-- Create the genomic_database database
+CREATE DATABASE genomic_database;
+
+-- Connect to the genomic_database database
+\c genomic_database;
+
+-- Create the Chromosomes table
+CREATE TABLE Chromosomes (
+    chromosome_id SERIAL PRIMARY KEY,
+    chromosome_name VARCHAR(50) NOT NULL,
+    genome_build VARCHAR(20) NOT NULL
+);
+
+-- Create the Genes table
+CREATE TABLE Genes (
+    gene_id SERIAL PRIMARY KEY,
+    gene_name VARCHAR(255) NOT NULL,
+    chromosome_id INT NOT NULL,
+    start_position INT NOT NULL,
+    end_position INT NOT NULL,
+    gene_sequence TEXT NOT NULL,
+    UNIQUE (gene_name, chromosome_id),
+    FOREIGN KEY (chromosome_id) REFERENCES Chromosomes(chromosome_id)
+);
+
+-- Create the Proteins table
+CREATE TABLE Proteins (
+    protein_id SERIAL PRIMARY KEY,
+    protein_name VARCHAR(255) NOT NULL,
+    gene_id INT NOT NULL,
+    protein_sequence TEXT NOT NULL,
+    FOREIGN KEY (gene_id) REFERENCES Genes(gene_id)
+);
+
+-- Create the Variants table
+CREATE TABLE Variants (
+    variant_id SERIAL PRIMARY KEY,
+    gene_id INT NOT NULL,
+    variant_type VARCHAR(50) NOT NULL,
+    variant_position INT NOT NULL,
+    reference_sequence TEXT NOT NULL,
+    alternate_sequence TEXT NOT NULL,
+    FOREIGN KEY (gene_id) REFERENCES Genes(gene_id)
+);
