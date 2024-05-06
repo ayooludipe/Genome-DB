@@ -1,12 +1,16 @@
-# Human Genome System
+# Human Genome Database
+
+Welcome to the Human Genome Database project! This repository contains the code and documentation for a comprehensive human genome database designed to facilitate genetic research and analysis.
 
 ## Overview
-The Human Genome System is a database system designed to store and manage gene and protein data along with their corresponding nucleotide and protein sequences.
+
+The Human Genome Database is a centralized repository of genomic data sourced from KEGG Homo sapiens and UniProt. It provides researchers with access to gene sequences, chromosomal information, protein data, and genetic variants associated with the human genome.
 
 ## Features
-- Store gene and protein information including names and descriptions.
-- Store nucleotide and protein sequence data.
-- Establish links between genes and proteins.
+- Database Schema: Utilizes a PostgreSQL database with tables for genes, chromosomes, proteins, and variants.
+- Data Loading: Includes scripts to load data from KEGG Homo sapiens and UniProt into the database.
+- Data Analysis: Provides PHP scripts for performing various analyses on the genomic data, such as gene-disease association analysis, population genetics analysis, and variant analysis.
+- Web Interface: Allows users to interact with the database through a web-based interface for querying and visualization
 
 ## Installation
 1. Clone this repository to your local machine.
