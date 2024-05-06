@@ -1,24 +1,24 @@
-import psycopg2
+<?php
+include 'db_connect.php';
 
-# Connect to the database
-conn = psycopg2.connect(database="genomic_database", user="username", password="password", host="localhost", port="5432")
-cursor = conn.cursor()
+// Query to get the count of variants for each gene
+$sql = "SELECT g.gene_id, g.gene_name, COUNT(v.variant_id) AS variant_count
+        FROM Genes g
+        LEFT JOIN Variants v ON g.gene_id = v.gene_id
+        GROUP BY g.gene_id, g.gene_name
+        ORDER BY g.gene_id";
 
-# Query for significant gene-disease associations
-cursor.execute("""
-    SELECT g.gene_name, d.disease_name, ga.p_value
-    FROM Genes g
-    JOIN GeneDiseaseAssociations ga ON g.gene_id = ga.gene_id
-    JOIN Diseases d ON ga.disease_id = d.disease_id
-    WHERE ga.p_value < 0.05
-""")
-gene_disease_associations = cursor.fetchall()
+$result = $conn->query($sql);
 
-# Print significant associations
-print("Significant Gene-Disease Associations:")
-for row in gene_disease_associations:
-    print(row[0], "-", row[1], "(p-value:", row[2], ")")
-
-# Close database connection
-cursor.close()
-conn.close()
+if ($result->num_rows > 0) {
+    // Output data of each row
+    echo "<table><tr><th>Gene ID</th><th>Gene Name</th><th>Variant Count</th></tr>";
+    while($row = $result->fetch_assoc()) {
+        echo "<tr><td>" . $row["gene_id"] . "</td><td>" . $row["gene_name"] . "</td><td>" . $row["variant_count"] . "</td></tr>";
+    }
+    echo "</table>";
+} else {
+    echo "0 results";
+}
+$conn->close();
+?>
