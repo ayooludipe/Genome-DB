@@ -1,65 +1,68 @@
+<?php
+   $servername = "localhost";
+   $username = "aoludipe";
+   $password = "";
+   $dbname = "aoludipe";
+
+   // connect the database with the server
+   $conn = new mysqli($servername,$username,$password,$dbname);
+
+    // if error occurs
+    if ($conn -> connect_errno)
+    {
+       echo "Failed to connect to MySQL: " . $conn -> connect_error;
+       exit();
+    }
+
+    $sql = "SELECT * FROM Human_Genome";
+    $result = ($conn->query($sql));
+    //declare array to store the data of database
+    $row = [];
+
+    if ($result->num_rows > 0)
+    {
+        // fetch all data from db into array
+        $row = $result->fetch_all(MYSQLI_ASSOC);
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" type="text/css" href="webpage_style.css">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Genome Data Management System</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta name="webview" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <header>
-        <h1>Genome Data Management System</h1>
-        <nav>
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#installation">Installation</a></li>
-                <li><a href="#usage">Usage</a></li>
-                <li><a href="#contributors">Contributors</a></li>
-            </ul>
-        </nav>
-    </header>
+    <h1>BIOI-4870 Final Project [Human Genome Database System]</h1>
+    <p>This is my final project for BIOI 4870. It is made to help researchers to predict what mutation typ$
+    <p>To navigate this tool, click on one of the cancer names from the table below. It should take you to$
+        By clicking on one of the genes within the list, it should visualize the proportion of each mutati$
+        Some genes will not show a pie chart. This is either because it did not have any mutation record o$
+    </p>
+    <h2>Gene Table</h2>
+    <p>Select a Gene type from this table.</p>
+    <table id="GeneTable">
+        <thead>
+            <tr>
+                <th>Gebe Name</th>
+                <th>Gene Symbol</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+               if(!empty($row))
+               foreach($row as $rows)
+              {
+            ?>
+            <tr>
 
-    <main>
-        <section id="about">
-            <h2>About</h2>
-            <p>The Genome Data Management System is a database system designed to store and manage gene and protein data along with their corresponding nucleotide and protein sequences.</p>
-        </section>
+                <td><?php echo $rows['Gene_name']; ?></td>
+                <td><a href="<?php echo $rows['Gene_abb'] ?>.php"><?php echo $rows['Gene_abb']; ?></a>$
 
-        <section id="features">
-            <h2>Features</h2>
-            <ul>
-                <li>Store gene and protein information including names and descriptions.</li>
-                <li>Store nucleotide and protein sequence data.</li>
-                <li>Establish links between genes and proteins.</li>
-            </ul>
-        </section>
-
-        <section id="installation">
-            <h2>Installation</h2>
-            <ol>
-                <li>Clone this repository to your local machine.</li>
-                <li>Execute the <code>ddl.sql</code> script in your preferred SQL database management system to create the necessary tables.</li>
-                <li>You may populate the tables with sample data for testing purposes using the provided <code>sample_data.sql</code> script.</li>
-                <li>Start using the system to manage your genome data.</li>
-            </ol>
-        </section>
-
-        <section id="usage">
-            <h2>Usage</h2>
-            <p>Use the provided SQL queries to interact with the database and perform operations such as inserting, updating, and querying data. Ensure proper handling of foreign key constraints when linking genes and proteins.</p>
-        </section>
-
-        <section id="contributors">
-            <h2>Contributors</h2>
-            <ul>
-                <li><a href="https://github.com/ayooludipe">aoludipe</a></li>
-            </ul>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2024 Genome Data Management System. All rights reserved.</p>
-    </footer>
+            </tr>
+            <?php } ?>
+        </tbody>
+    </table>
 </body>
 </html>
