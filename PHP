@@ -15,8 +15,6 @@ $connect = mysqli_connect($server,$username,"",$database);
 if($connect->connect_error){
 	echo "Something has gone terribly wrong";
 	echo "Connection error:" .$connect->connect_error;
-}else{
-	echo "<p>Hello World, How Are You Today?</p>";
 }
 
 /* Run a basic SQL query and throw
@@ -27,17 +25,16 @@ if($connect->connect_error){
  * token in the current tuple from the result relation
  * If there are no results, print an error message.
  */
-if ($result = mysqli_query($connect, $query)) {
-    while ($row = mysqli_fetch_row($result)) {
-        printf("<br>%s", $row[0]);
-    }
-    mysqli_free_result($result);
-}else{
-	echo "No results";
-}
+$sql = "SELECT * FROM Genes";
+$result = $conn->query($sql);
 
-/*Always close your connection. 
- * Its a courtesy to your fellow users.
- */
-mysqli_close($connect);
+if ($result->num_rows > 0) {
+    // Output data of each row
+    while($row = $result->fetch_assoc()) {
+        echo "Gene ID: " . $row["gene_id"]. " - Name: " . $row["gene_name"]. "<br>";
+    }
+} else {
+    echo "0 results";
+}
+$conn->close();
 ?>
