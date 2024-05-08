@@ -1,26 +1,34 @@
--- Insert data into Chromosomes table
-INSERT INTO Chromosomes (chromosome_name, genome_build) VALUES
-('Chr1', 'GRCh38'),
-('Chr2', 'GRCh38'),
--- Add more chromosomes as needed
+import pandas as pd
+import MySQLdb
 
--- Insert data into Genes table
--- Assume you have the necessary data from KEGG Homo sapiens
-INSERT INTO Genes (gene_name, chromosome_id, start_position, end_position, gene_sequence) VALUES
-('Gene1', 1, 1000, 2000, 'ATCG...'),
-('Gene2', 2, 1500, 2500, 'ATCG...'),
--- Add more genes as needed
+mydb = MySQLdb.connect(
+        host='localhost',
+        user='aoludipe',
+        db='aoludipe')
 
--- Insert data into Proteins table
--- Assume you have the necessary data from UniProt
-INSERT INTO Proteins (protein_name, gene_id, protein_sequence) VALUES
-('Protein1', 1, 'MKFL...'),
-('Protein2', 2, 'LTGR...'),
--- Add more proteins as needed
+cursor = mydb.cursor()
 
--- Insert data into Variants table
--- Assume you have the necessary data for gene variants
-INSERT INTO Variants (gene_id, variant_type, variant_position, reference_sequence, alternate_sequence) VALUES
-(1, 'SNP', 1500, 'A', 'G'),
-(2, 'Insertion', 2000, 'T', 'TA'),
--- Add more variants as needed
+# Preparing the data to be inserted into the Genes table
+gene_data = pd.read_csv('Project_Data.csv', usecols=['Entry', 'Gene Names'])
+gene_data = gene_data.rename(columns={'Entry': 'gene_id', 'Gene Names': 'gene_name'})
+gene_data = gene_data.where((pd.notnull(gene_data)), None)
+
+for i,row in gene_data.iterrows():
+    sql = "INSERT INTO Genes (gene_id, gene_name) VALUES (%s, %s)"
+    cursor.execute(sql, tuple(row))
+
+
+# Preparing the data to be inserted into the Proteins table
+protein_data = pd.read_csv('Project_Data.csv', usecols=['Entry', 'Protein names', 'Sequence'])
+protein_data = protein_data.rename(columns={'Entry': 'gene_id', 'Protein names': 'protein_name', 'Sequence': 'protein_sequence'})
+protein_data = protein_data.where((pd.notnull(protein_data)), None)
+
+print(protein_data)
+
+for i,row in protein_data.iterrows():
+    sql = "INSERT INTO Proteins (gene_id, protein_name, protein_sequence) VALUES (%s, %s, %s)"
+    cursor.execute(sql, tuple(row))
+
+mydb.commit()
+cursor.close()
+print ("Done")
